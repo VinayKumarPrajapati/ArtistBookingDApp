@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 //Route Imports
 const user = require("./routes/api/user");
@@ -21,6 +22,9 @@ mongoose
 app.get("/", (req, res) => res.send("Artist DApp"));
 
 // Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use("/api/user", user);
 app.use("/api/artist", artist);
 app.use("/api/post", post);

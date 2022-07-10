@@ -18,7 +18,6 @@ const UserSchema = new Schema({
 	address: {},
 	performanceLanguage: {
 		type: Array,
-		required: true,
 	},
 	category: {
 		type: String,
@@ -41,4 +40,4 @@ const UserSchema = new Schema({
 	},
 });
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = User = mongoose.model("user", UserSchema);
