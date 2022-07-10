@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const passport = require("passport");
 
 //Load Validation
@@ -33,6 +34,40 @@ router.get(
 			.catch((err) => res.status(404).json(err));
 	}
 );
+
+// @route   POST api/uniqueId/:uniqueId
+// @desc    Get profile by uniqueId
+// @access  public
+router.get("/uniqueId/:uniqueId", (req, res) => {
+	const errors = {};
+	Profile.findOne({ uniqueId: req.params.uniqueId })
+		.populate("user", ["name", "avatar"])
+		.then((profile) => {
+			if (!profile) {
+				erros.noprofile = "There is no profile associated with this unique id";
+				res.status(404).json(errors);
+			}
+			res.json(profile);
+		})
+		.catch((err) => res.status(404).json(err));
+});
+
+// @route   POST api/user/:userId
+// @desc    Get profile by userId
+// @access  public
+router.get("/user/:user_id", (req, res) => {
+	const errors = {};
+	Profile.findOne({ user: req.params.userId })
+		.populate("user", ["name", "avatar"])
+		.then((profile) => {
+			if (!profile) {
+				errors.noprofile = "There is no profile associated with this unique id";
+				res.status(404).json(errors);
+			}
+			res.json(profile);
+		})
+		.catch((err) => res.status(404).json(err));
+});
 
 // @route   POST api/profile
 // @desc    Create User Profile
@@ -75,12 +110,12 @@ router.post(
 
 		//Social Links
 		profileFields.social = {};
-		if (req.body.youtube) profileFields.youtube = req.body.youtube;
-		if (req.body.twitter) profileFields.twitter = req.body.twitter;
-		if (req.body.facebook) profileFields.facebook = req.body.facebook;
-		if (req.body.linkedin) profileFields.linkedin = req.body.linkedin;
-		if (req.body.instagram) profileFields.instagram = req.body.instagram;
-
+		if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
+		if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
+		if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
+		if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
+		if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+		console.log(profileFields.social);
 		Profile.findOne({ user: req.user.id }).then((profile) => {
 			if (profile) {
 				//Update Profile Fields
