@@ -34,16 +34,25 @@ Services:-
 #### Get item
 
 ```http
-  GET /api/items/${id}
+  GET /api/user/${userId}
 ```
 
-| Parameter | Type     | Description                       |
+| Route     | Access   | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
+| `id`      | `Public` | **Required**. Id of user to fetch |
 
-#### add(num1, num2)
+#### Get Profile
 
-Takes two numbers and returns the sum.
+```http
+  GET /api/profile
+```
+
+| Route     | Access   | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `Private`|**Required** Auth profile to fetch |
+
+
+
 
 ## Quick Start Artist Booking Dapp 🧑‍🎨🎨
 
