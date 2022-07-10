@@ -19,32 +19,32 @@ module.exports = function validateProfileInput(data) {
 	}
 
 	if (!isEmpty(data.website)) {
-		if (!validator.isURL(data.website)) {
+		if (!Validator.isURL(data.website)) {
 			errors.website = "Web URL is not valid";
 		}
 	}
 	if (!isEmpty(data.youtube)) {
-		if (!validator.isURL(data.youtube)) {
+		if (!Validator.isURL(data.youtube)) {
 			errors.youtube = "Youtube id is not valid";
 		}
 	}
 	if (!isEmpty(data.twitter)) {
-		if (!validator.isURL(data.twitter)) {
+		if (!Validator.isURL(data.twitter)) {
 			errors.twitter = "Twitter id is not valid";
 		}
 	}
 	if (!isEmpty(data.facebook)) {
-		if (!validator.isURL(data.facebook)) {
+		if (!Validator.isURL(data.facebook)) {
 			errors.facebook = "FaceBook id is not valid";
 		}
 	}
 	if (!isEmpty(data.linkedin)) {
-		if (!validator.isURL(data.linkedin)) {
+		if (!Validator.isURL(data.linkedin)) {
 			errors.linkedin = "Linkedin id is not valid";
 		}
 	}
 	if (!isEmpty(data.instagram)) {
-		if (!validator.isURL(data.instagram)) {
+		if (!Validator.isURL(data.instagram)) {
 			errors.instagram = "Instagram id is not valid";
 		}
 	}

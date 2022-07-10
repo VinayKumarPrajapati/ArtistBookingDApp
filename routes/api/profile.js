@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
+//Load Validation
+const validateProfileInput = require("../../validation/profile");
+
 // Importing Profile & User Model
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
@@ -22,7 +25,7 @@ router.get(
 		Profile.findOne({ user: req.user.id })
 			.then((profile) => {
 				if (!profile) {
-					error.noprofile = "No profile associated with this user id";
+					errors.noprofile = "No profile associated with this user id";
 					return res.status(404).json(errors);
 				}
 				res.json(profile);
@@ -38,6 +41,13 @@ router.post(
 	"/",
 	passport.authenticate("jwt", { session: false }),
 	(req, res) => {
+		const { errors, isValid } = validateProfileInput(req.body);
+
+		//Checking Validation
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
+
 		//Get Fields
 		const profileFields = {};
 		profileFields.user = req.user.id;

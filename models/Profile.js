@@ -10,7 +10,6 @@ const ProfileSchema = new Schema({
 
 	gender: {
 		type: String,
-		required: true,
 	},
 	uniqueId: {
 		type: String,
@@ -29,7 +28,6 @@ const ProfileSchema = new Schema({
 	},
 	performanceLanguage: {
 		type: [String],
-		required: true,
 	},
 	biography: {
 		type: String,
@@ -144,7 +142,7 @@ const ProfileSchema = new Schema({
 	},
 	priceRange: {
 		type: String,
-		required: true,
+		// required: true,
 	},
 	date: {
 		type: Date,
