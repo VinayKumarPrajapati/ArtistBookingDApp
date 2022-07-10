@@ -3,17 +3,8 @@ const Schema = mongoose.Schema;
 
 // User Schema
 const UserSchema = new Schema({
-	firstName: {
-		type: String,
-		required: true,
-	},
-	lastName: {
-		type: String,
-		required: true,
-	},
 	professionalName: {
 		type: String,
-		required: true,
 	},
 	address: {
 		type: Schema.Types.ObjectId,
@@ -22,7 +13,6 @@ const UserSchema = new Schema({
 
 	category: {
 		type: String,
-		required: true,
 	},
 	email: {
 		type: String,

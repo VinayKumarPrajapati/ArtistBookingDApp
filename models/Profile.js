@@ -7,7 +7,12 @@ const ProfileSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "user",
 	},
-
+	firstName: {
+		type: String,
+	},
+	lastName: {
+		type: String,
+	},
 	gender: {
 		type: String,
 	},
@@ -70,7 +75,7 @@ const ProfileSchema = new Schema({
 	],
 	training: [
 		{
-			school: {
+			trainingCenter: {
 				type: String,
 				required: true,
 			},
@@ -78,7 +83,7 @@ const ProfileSchema = new Schema({
 				type: String,
 				required: true,
 			},
-			fieldofstudy: {
+			fieldofTraining: {
 				type: String,
 				required: true,
 			},

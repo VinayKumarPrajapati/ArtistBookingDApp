@@ -5,6 +5,8 @@ const passport = require("passport");
 
 //Load Validation
 const validateProfileInput = require("../../validation/profile");
+const validateExperienceInput = require("../../validation/experience");
+const validateTrainingInput = require("../../validation/training");
 
 // Importing Profile & User Model
 const Profile = require("../../models/Profile");
@@ -23,10 +25,12 @@ router.get(
 	passport.authenticate("jwt", { session: false }),
 	(req, res) => {
 		const errors = {};
+
 		Profile.findOne({ user: req.user.id })
+			.populate("user", ["name", "avatar"])
 			.then((profile) => {
 				if (!profile) {
-					errors.noprofile = "No profile associated with this user id";
+					errors.noprofile = "There is no profile for this user";
 					return res.status(404).json(errors);
 				}
 				res.json(profile);
@@ -57,16 +61,39 @@ router.get("/uniqueId/:uniqueId", (req, res) => {
 // @access  public
 router.get("/user/:user_id", (req, res) => {
 	const errors = {};
-	Profile.findOne({ user: req.params.userId })
+
+	Profile.findOne({ user: req.params.user_id })
 		.populate("user", ["name", "avatar"])
 		.then((profile) => {
 			if (!profile) {
-				errors.noprofile = "There is no profile associated with this unique id";
+				errors.noprofile = "There is no profile for this user";
 				res.status(404).json(errors);
 			}
+
 			res.json(profile);
 		})
-		.catch((err) => res.status(404).json(err));
+		.catch((err) =>
+			res.status(404).json({ profile: "There is no profile for this user" })
+		);
+});
+
+// @route   POST api/profile/all
+// @desc    Get all profiles
+// @access  public
+router.get("/all", (req, res) => {
+	const errors = {};
+
+	Profile.find()
+		.populate("user", ["name", "avatar"])
+		.then((profiles) => {
+			if (!profiles) {
+				errors.noprofile = "There are no profiles";
+				return res.status(404).json(errors);
+			}
+
+			res.json(profiles);
+		})
+		.catch((err) => res.status(404).json({ profile: "There are no profiles" }));
 });
 
 // @route   POST api/profile
@@ -141,6 +168,70 @@ router.post(
 					}
 				);
 			}
+		});
+	}
+);
+
+// @route   POST api/profile/experience
+// @desc    Add experience to Artist
+// @access  Private
+router.post(
+	"/experience",
+	passport.authenticate("jwt", { session: false }),
+	(req, res) => {
+		const { errors, isValid } = validateExperienceInput(req.body);
+
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
+
+		Profile.findOne({ user: req.user.id }).then((profile) => {
+			const newExp = {
+				category: req.body.category,
+				genre: req.body.genre,
+				location: req.body.location,
+				eventType: req.body.eventType,
+				performaceDuration: req.body.performaceDuration,
+				offStageMember: req.body.offStageMember,
+				priceCharged: req.body.priceCharged,
+			};
+			//Profile Obj to Array
+			profile.experience.unshift(newExp);
+			profile.save().then((profile) => res.json(profile));
+		});
+	}
+);
+
+// @route   POST api/profile/training
+// @desc    Add training to profile
+// @access  Private
+router.post(
+	"/training",
+	passport.authenticate("jwt", { session: false }),
+	(req, res) => {
+		const { errors, isValid } = validateTrainingInput(req.body);
+
+		// Check Validation
+		if (!isValid) {
+			// Return any errors with 400 status
+			return res.status(400).json(errors);
+		}
+
+		Profile.findOne({ user: req.user.id }).then((profile) => {
+			const newTraining = {
+				trainingCenter: req.body.trainingCenter,
+				certificate: req.body.certificate,
+				fieldofTraining: req.body.fieldofTraining,
+				from: req.body.from,
+				to: req.body.to,
+				current: req.body.current,
+				description: req.body.description,
+			};
+
+			// Add to exp array
+			profile.training.unshift(newTraining);
+
+			profile.save().then((profile) => res.json(profile));
 		});
 	}
 );
