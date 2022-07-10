@@ -217,5 +217,5 @@ If you have any feedback, please reach out to me at vinay91098@gmail.com
 
 ## Authors
 
-- [@Vinayk76](https://github.com/Vinayk76)
+- [@VinayKumarPrajapati](https://github.com/VinayKumarPrajapati)
 
