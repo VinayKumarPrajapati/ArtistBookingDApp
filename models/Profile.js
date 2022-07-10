@@ -15,7 +15,7 @@ const ProfileSchema = new Schema({
 	uniqueId: {
 		type: String,
 		required: true,
-		max: 32,
+		max: 64,
 	},
 	artistCompany: {
 		type: String,
