@@ -15,10 +15,11 @@ const UserSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	address: {},
-	performanceLanguage: {
-		type: Array,
+	address: {
+		type: Schema.Types.ObjectId,
+		ref: "address",
 	},
+
 	category: {
 		type: String,
 		required: true,
