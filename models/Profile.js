@@ -7,6 +7,7 @@ const ProfileSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "user",
 	},
+
 	gender: {
 		type: String,
 		required: true,
@@ -22,7 +23,7 @@ const ProfileSchema = new Schema({
 	website: {
 		type: String,
 	},
-	artistTalent: {
+	category: {
 		type: [String],
 		required: true,
 	},
