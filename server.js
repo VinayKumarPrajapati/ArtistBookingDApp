@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 //Route Imports
 const user = require("./routes/api/user");
@@ -10,8 +11,12 @@ const profile = require("./routes/api/profile");
 
 const app = express();
 
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // MongoDB config
-const db = require("./config/keys").mongoURI;
+const db = require("./config/key").mongoURI;
 
 // Connect with MongoDB
 mongoose
@@ -19,12 +24,13 @@ mongoose
 	.then(() => console.log("MongoDB Atlas Connected"))
 	.catch((err) => console.log(err));
 
-app.get("/", (req, res) => res.send("Artist DApp"));
-
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(passport.initialize());
 
+// Config
+require("./config/passport")(passport);
+
+//Middleware
 app.use("/api/user", user);
 app.use("/api/artist", artist);
 app.use("/api/post", post);
