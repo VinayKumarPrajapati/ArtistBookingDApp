@@ -4,10 +4,10 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"client-install": "npm install --prefix client",
+		"front-end-install": "npm install --prefix front-end",
 		"start": "node server.js",
 		"server": "nodemon server.js",
-		"client": "npm start --prefix client",
+		"front-end": "npm start --prefix front-end",
 		"dev": "concurrently \"npm run server\" \"npm run front-end\""
 	},
 	"keywords": [],
