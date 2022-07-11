@@ -144,15 +144,6 @@ To run tests, run the following command
 ```
 
 
-## Usage/Examples
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
 
 
 ## Tech Stack
