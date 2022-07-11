@@ -23,9 +23,6 @@ Artist Booking Decentralized application will help artist to get listed and user
 * Artist can add training details 
 * Artist can add previous attended events/performace
 * Artist can Create Event list the details for the same
-* Artist can mint & publish NFTs
-* Artist can buy or sell NFTs
-
 
 
 
