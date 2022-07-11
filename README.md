@@ -16,6 +16,8 @@ Artist Booking Decentralized application will help artist to get listed and user
 Services:-
 
 - Auth:- Sign Up, Sign In, Sign Out
+- Profile:- Create Profile, Edit Profile, Delete Profile
+- Artist Profiles:- Get all Artist Profile
 
 
 
