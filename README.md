@@ -118,7 +118,7 @@ $env:NODE_ENV="production"
 node server.js
 ```
 
-Check in browser on http://localhost:8000/
+Check in browser on http://localhost:3000/
 
 
 ## Programming language and tools used to create DApp 
