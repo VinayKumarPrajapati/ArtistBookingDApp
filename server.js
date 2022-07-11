@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 
-const users = require("./routes/api/users");
+const user = require("./routes/api/user");
 const profile = require("./routes/api/profile");
 
 const app = express();
@@ -28,7 +28,7 @@ require("./config/passport")(passport);
 
 //Middleware
 app.use("/api/user", user);
-app.use("/api/artist", artist);
+// app.use("/api/artist", artist);
 app.use("/api/profile", profile);
 
 const port = process.env.PORT || 8000;
