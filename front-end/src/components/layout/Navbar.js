@@ -39,26 +39,7 @@ class Navbar extends Component {
 													Home
 												</Link>
 											</li>
-											<li className="nav-item">
-												<Link className="nav-link" to="about-us">
-													features
-												</Link>
-											</li>
-											<li className="nav-item">
-												<Link className="nav-link" to="career">
-													testimonial
-												</Link>
-											</li>
-											<li className="nav-item">
-												<Link className="nav-link" to="blog">
-													download
-												</Link>
-											</li>
-											<li className="nav-item">
-												<Link className="nav-link" to="faq">
-													contact
-												</Link>
-											</li>
+
 											<li className="nav-item">
 												<Link
 													className="nav-link d-flex align-items-center btn btn-white"
@@ -67,6 +48,16 @@ class Navbar extends Component {
 														className="me-2 iw-18 ih-18"
 														data-feather="log-in"></i>
 													login
+												</Link>
+											</li>
+											<li className="nav-item">
+												<Link
+													className="nav-link d-flex align-items-center btn btn-white"
+													to="register">
+													<i
+														className="me-2 iw-18 ih-18"
+														data-feather="sign-up"></i>
+													Register
 												</Link>
 											</li>
 										</ul>
