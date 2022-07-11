@@ -12,6 +12,8 @@ Artist Booking Decentralized application will help artist to get listed and user
 * Created Models using Mongoose [Mongoose](https://mongoosejs.com/)
 * Created UI Using React [React](https://reactjs.org/)
 * Redux used for state management [Redux](https://redux.js.org/)
+* NextJS used for creating Web 3.o [NextJS](https://nextjs.org/)
+* 
 
 ## Few of the feature it should support after completion of the Project
 * Artist can Register himself/herself
