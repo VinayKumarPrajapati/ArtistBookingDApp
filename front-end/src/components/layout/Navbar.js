@@ -1,8 +1,52 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
 class Navbar extends Component {
+	onLogoutClick(e) {
+		e.preventDefault();
+		this.props.logoutUser();
+	}
+
 	render() {
+		const { isAuthenticated, user } = this.props.auth;
+		const authLinks = (
+			<ul className="navbar-nav ml-auto">
+				<li className="nav-item">
+					<a
+						href=""
+						onClick={this.onLogoutClick.bind(this)}
+						className="nav-link">
+						<img
+							className="rounded-circle"
+							src={user.avatar}
+							alt={user.name}
+							style={{ width: "25px", marginRight: "5px" }}
+							title="You must have a Gravatar connected to your email to display an image"
+						/>{" "}
+						Logout
+					</a>
+				</li>
+			</ul>
+		);
+
+		const guestLinks = (
+			<ul className="navbar-nav ml-auto">
+				<li className="nav-item">
+					<Link className="nav-link" to="/register">
+						Sign Up
+					</Link>
+				</li>
+				<li className="nav-item">
+					<Link className="nav-link" to="/login">
+						Login
+					</Link>
+				</li>
+			</ul>
+		);
+
 		return (
 			<div>
 				<header className="no-sticky bg-transparent home-landing overflow-hidden">
@@ -29,37 +73,7 @@ class Navbar extends Component {
 									</button>
 									<div className="navbar-collapse" id="navbarNavDropdown">
 										<ul className="navbar-nav">
-											<li className="nav-item d-block d-lg-none back-btn">
-												<Link className="nav-link" to="javascript:void(0)">
-													back
-												</Link>
-											</li>
-											<li className="nav-item active">
-												<Link className="nav-link" to="index">
-													Home
-												</Link>
-											</li>
-
-											<li className="nav-item">
-												<Link
-													className="nav-link d-flex align-items-center btn btn-white"
-													to="login">
-													<i
-														className="me-2 iw-18 ih-18"
-														data-feather="log-in"></i>
-													login
-												</Link>
-											</li>
-											<li className="nav-item">
-												<Link
-													className="nav-link d-flex align-items-center btn btn-white"
-													to="register">
-													<i
-														className="me-2 iw-18 ih-18"
-														data-feather="sign-up"></i>
-													Register
-												</Link>
-											</li>
+											{isAuthenticated ? authLinks : guestLinks}
 										</ul>
 									</div>
 								</nav>
@@ -72,4 +86,13 @@ class Navbar extends Component {
 	}
 }
 
-export default Navbar;
+Navbar.propTypes = {
+	logoutUser: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(Navbar);

@@ -29,7 +29,6 @@ const ProfileSchema = new Schema({
 	},
 	category: {
 		type: [String],
-		required: true,
 	},
 	performanceLanguage: {
 		type: [String],
@@ -47,26 +46,21 @@ const ProfileSchema = new Schema({
 		{
 			category: {
 				type: String,
-				required: true,
 			},
 			genre: {
 				type: String,
-				required: true,
 			},
 			location: {
 				type: String,
-				required: true,
 			},
 			eventType: {
 				type: String,
-				required: true,
 			},
 			performaceDuration: {
 				type: String,
 			},
 			offStageMember: {
 				type: Boolean,
-				required: true,
 			},
 			priceCharged: {
 				type: String,
@@ -77,26 +71,21 @@ const ProfileSchema = new Schema({
 		{
 			trainingCenter: {
 				type: String,
-				required: true,
 			},
 			certificate: {
 				type: String,
-				required: true,
 			},
 			fieldofTraining: {
 				type: String,
-				required: true,
 			},
 			from: {
 				type: Date,
-				required: true,
 			},
 			to: {
 				type: Date,
 			},
 			current: {
 				type: Boolean,
-				default: false,
 			},
 			description: {
 				type: String,

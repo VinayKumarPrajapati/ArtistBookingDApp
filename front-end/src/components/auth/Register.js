@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import classnames from "classnames";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+import { Link } from "react-router-dom";
 
 class Register extends Component {
 	constructor() {
@@ -18,6 +21,18 @@ class Register extends Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
+	componentDidMount() {
+		if (this.props.auth.isAuthenticated) {
+			this.props.history.push("/dashboard");
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors) {
+			this.setState({ errors: nextProps.errors });
+		}
+	}
+
 	onChange(e) {
 		this.setState({ [e.target.name]: e.target.value });
 	}
@@ -32,10 +47,7 @@ class Register extends Component {
 			password2: this.state.password2,
 		};
 
-		axios
-			.post("/api/users/register", newUser)
-			.then((res) => console.log(res.data))
-			.catch((err) => this.setState({ errors: err.response.data }));
+		this.props.registerUser(newUser, this.props.history);
 	}
 
 	render() {
@@ -99,7 +111,7 @@ class Register extends Component {
 													noValidate
 													onSubmit={this.onSubmit}>
 													<div className="form-group">
-														<label for="name">Full Name</label>
+														<label htmlFor="name">Full Name</label>
 														<input
 															type="text"
 															className={classnames(
@@ -123,25 +135,25 @@ class Register extends Component {
 															data-feather="user"></i>
 													</div>
 													<div className="form-group">
-														<label for="exampleInputEmail1">
+														<label htmlFor="exampleInputEmail1">
 															Email address
 														</label>
 														<input
-															type="email"
+															type="text"
 															className={classnames(
 																"form-control form-control-lg",
 																{
-																	"is-invalid": errors.email,
+																	"is-invalid": errors.name,
 																}
 															)}
-															placeholder="Email Address"
-															name="email"
-															value={this.state.email}
+															placeholder="Name"
+															name="name"
+															value={this.state.name}
 															onChange={this.onChange}
 														/>
-														{errors.email && (
+														{errors.name && (
 															<div className="invalid-feedback">
-																{errors.email}
+																{errors.name}
 															</div>
 														)}
 														<i
@@ -149,7 +161,9 @@ class Register extends Component {
 															data-feather="mail"></i>
 													</div>
 													<div className="form-group">
-														<label for="exampleInputPassword1">Password</label>
+														<label htmlFor="exampleInputPassword1">
+															Password
+														</label>
 														<input
 															type="password"
 															className={classnames(
@@ -173,7 +187,7 @@ class Register extends Component {
 															data-feather="eye"></i>
 													</div>
 													<div className="form-group">
-														<label for="exampleInputPassword1">
+														<label htmlFor="exampleInputPassword1">
 															Repeat Password
 														</label>
 														<input
@@ -194,11 +208,6 @@ class Register extends Component {
 																{errors.password2}
 															</div>
 														)}
-														{errors.password && (
-															<div className="invalid-feedback">
-																{errors.password}
-															</div>
-														)}
 														<i
 															className="input-icon iw-20 ih-20"
 															data-feather="eye"></i>
@@ -213,7 +222,7 @@ class Register extends Component {
 															/>
 															<label
 																className="form-check-label"
-																for="exampleCheck1">
+																htmlFor="exampleCheck1">
 																remember me
 															</label>
 														</div>
@@ -222,12 +231,14 @@ class Register extends Component {
 														</Link>
 													</div>
 													<div className="btn-section">
-														<Link to="#" className="btn btn-solid btn-lg">
-															sign up
-														</Link>
+														<input
+															type="submit"
+															className="btn btn-info btn-block mt-4"
+														/>
+
 														<Link
 															to="login"
-															className="btn btn-solid btn-lg ms-auto">
+															className="btn btn-info btn-block mt-4">
 															login
 														</Link>
 													</div>
@@ -286,4 +297,15 @@ class Register extends Component {
 	}
 }
 
-export default Register;
+Register.propTypes = {
+	registerUser: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	auth: state.auth,
+	errors: state.errors,
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
