@@ -13,11 +13,8 @@ Artist Booking Decentralized application will help artist to get listed and user
 * Created UI Using React [React](https://reactjs.org/)
 * Redux used for state management [Redux](https://redux.js.org/)
 
-Services:-
+##Few of the feature it should support after completion of the Project
 
-- Auth:- Sign Up, Sign In, Sign Out
-- Profile:- Create Profile, Edit Profile, Delete Profile
-- Artist Profiles:- Get all Artist Profile
 
 
 
