@@ -1,13 +1,15 @@
+//Contact Schema
 const ContactSchema = new Schema({
 	phNumber: [Number],
 	email: [String],
 	address: {
 		state: String,
 		city: String,
+		street2: String,
 		street: String,
 		houseNumber: String,
 	},
-	created: { type: Date, default: Date.now, required: true },
+	createdAt: { type: Date, default: Date.now, required: true },
 });
 
-module.exports = ContactInfo = mongoose.model("contactInfo", ContactSchema);
+module.exports = ContactInfo = mongoose.model("contact", ContactSchema);

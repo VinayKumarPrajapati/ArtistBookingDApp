@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { ObjectId } = mongoose.Schema;
 
 // User Schema
 const UserSchema = new Schema({
 	professionalName: {
 		type: String,
 	},
-	address: {
-		type: Schema.Types.ObjectId,
-		ref: "address",
+	contactInfo: {
+		type: ObjectId,
+		ref: "contact",
 	},
 
 	category: {
@@ -25,7 +26,7 @@ const UserSchema = new Schema({
 	avatar: {
 		type: String,
 	},
-	created: {
+	createdAt: {
 		type: Date,
 		default: Date.now,
 	},
