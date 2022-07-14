@@ -26,6 +26,9 @@ const UserSchema = new Schema({
 	avatar: {
 		type: String,
 	},
+	stripe_account_id: "",
+	stripe_artist: {},
+	stripeSession: {},
 	createdAt: {
 		type: Date,
 		default: Date.now,
