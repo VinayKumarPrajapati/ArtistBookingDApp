@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useStore } from "react-redux";
-import { read, diffDays } from "../actions/art";
+import { read, diffArtDays } from "../actions/art";
 import moment from "moment";
 import { useSelector } from "react-redux";
 
@@ -44,8 +44,8 @@ const ViewArt = ({ match, history }) => {
 						<p className="alert alert-info mt-3">${art.price}</p>
 						<p className="card-text">
 							<span className="float-right text-primary">
-								for {diffDays(art.from, art.to)}{" "}
-								{diffDays(art.from, art.to) <= 1 ? " day" : " days"}
+								for {diffArtDays(art.from, art.to)}{" "}
+								{diffArtDays(art.from, art.to) <= 1 ? " day" : " days"}
 							</span>
 						</p>
 						<p>
